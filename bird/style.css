@@ -1,0 +1,118 @@
+body {
+	background: #beeeef;
+	overflow: hidden;
+  }
+  
+  @keyframes camera {
+	0%, 10%, 90%, 100% { transform: translate(-50%, -50%) perspective(1000px) rotateX(0deg); }
+	20%, 80% { transform: translate(-50%, -50%) perspective(1000px) rotateX(80deg); }
+  }
+  
+  @keyframes showShadow {
+	0% { box-shadow: 0 0 0 0vmax #000; }
+	100% { box-shadow: 0 0 0 100vmax #000; }
+  }
+  
+  .splash {
+	animation: 
+	  camera 7s forwards,
+	  showShadow 1s 7.2s linear forwards;
+	font-size: 4vmin;
+	width: 20em;
+	height: 20em;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform-origin: 50% 100%;
+	transform: translate(-50%, -50%) perspective(1000px) rotateX(80deg);
+	transform-style: preserve-3d;
+	background: black;
+	background-repeat: none;
+	box-shadow: 0 0 0 100vmax #0000;
+  }
+  
+  @keyframes grow {
+	0% { transform: translate(-50%, -50%) scale(0); }
+	100% { transform: translate(-50%, -50%) scale(1); }
+  }
+  
+  @keyframes write {
+	0% { color: #0000; }
+	100% { color: #f00; }
+  }
+  
+  .splash::before {
+	animation: 
+	  grow 0.3s 3.9s forwards,
+	  write 0.5s 6.5s forwards
+	  ;
+	--color1: #fff;
+	--color2: #000;
+	content: "splash";
+	color: #0000;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	font-size: 1.75em;
+	width: 1em;
+	height: 1em;
+	transform: translate(-50%, -50%) scale(0);
+	background: 
+	  repeating-conic-gradient(var(--color1) 0 3%, #0000 0 11%),
+	  repeating-conic-gradient(#0000 0 5%, var(--color1) 0 7%) 50% 50% / 60% 60%,
+	  repeating-conic-gradient(#0000 0 7%, var(--color1) 0 9%) 50% 50% / 70% 70%,
+	  repeating-conic-gradient(#0000 0 11%, var(--color1) 0 13%) 50% 50% / 80% 80%,
+	  radial-gradient(var(--color1) 20%, #0000 0),
+	  var(--color2)
+	  ;
+	box-shadow: 0 0 0 0.5em var(--color2);
+	background-repeat: no-repeat;
+	filter: blur(0.03em) contrast(100);
+  }
+  
+  @property --position {
+	syntax: "<percentage>";
+	initial-value: 45%;
+	inherits: false;
+  }
+  
+  @keyframes poop {
+	0% { --position: 45%; }
+	100% { --position: 102%; }
+  }
+  
+  @keyframes showHide {
+	0%, 25%, 75%, 100% { opacity: 0; }
+	35%, 65% { opacity: 1; }
+  }
+  
+  .splash::after {
+	animation: 
+	  poop 1s 3s linear,
+	  showHide 7s forwards;
+	  ;
+	--tree: brown;
+	--bird: #49f;
+	--position: 45%;
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100%;
+	height: 100%;
+	transform-origin: 50% 100%;
+	transform: translate(-50%, -100%) rotateX(-90deg);
+	background: 
+	  /* bird */
+	  radial-gradient(at 45% 40%, #000 0.5%, #0000 0),
+	  conic-gradient(at 70% 50%, #0000 75deg, orange 0 105deg, #0000 0) 38% 40% / 10% 10%,
+	  radial-gradient(farthest-side at 50% 0, var(--bird) 99%, #0000 0) 48% 45% / 10% 5%,
+	  radial-gradient(farthest-side at 50% 100%, var(--bird) 99%, #0000 0) 45.5% 40% / 5% 6%,
+	  radial-gradient(farthest-side, #fff 99%, #0000 0) 50% var(--position) / 1.75% 1.75%,
+	  /* tree trunk and branches */
+	  conic-gradient(at 50% -20%, #0000 177deg, var(--tree) 177.1deg 182deg, #0000 182.1deg) 0 100% / 50% 90%,
+	  linear-gradient(to bottom right, var(--tree) 55%, #0000 0) 33% 50% / 25% 5%,
+	  conic-gradient(at -15% -15%, #0000 120deg, var(--tree) 0 125deg, #0000 0) 7% 30% / 20% 20%,
+	  conic-gradient(at 115% -15%, #0000 220deg, var(--tree) 0 225deg, #0000 0) 27% 15% / 10% 10%;
+	background-repeat: no-repeat;
+  }
